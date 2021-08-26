@@ -1,5 +1,9 @@
 {
     "item.metalbases.blank_module": "Blank Module",
+    "item.metalbases.blank_upgrade": "Blank Upgrade",
+    "item.metalbases.speed_upgrade": "Speed Upgrade",
+    "item.metalbases.energy_upgrade": "Energy Upgrade",
+    "item.metalbases.capacity_upgrade": "Capacity Upgrade",
     
     "itemGroup.metalbasesTab": "Metal Bases"
 }

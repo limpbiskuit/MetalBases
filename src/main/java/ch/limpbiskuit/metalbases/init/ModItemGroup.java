@@ -9,7 +9,7 @@ public class ModItemGroup {
         
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.BLANK_MODULE.get());
+            return new ItemStack(ModItems.WRENCH.get());
         }
 
     };
