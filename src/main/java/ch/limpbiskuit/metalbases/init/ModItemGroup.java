@@ -1,5 +1,6 @@
 package ch.limpbiskuit.metalbases.init;
 
+import ch.limpbiskuit.metalbases.init.item.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
