@@ -18,6 +18,7 @@ public class MetalBases {
         Registration.register();
     }
 
+
     private void setup(FMLCommonSetupEvent e) {
 
     }

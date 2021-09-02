@@ -1,7 +1,7 @@
 package ch.limpbiskuit.metalbases.init;
 
 import ch.limpbiskuit.metalbases.MetalBases;
-import ch.limpbiskuit.metalbases.init.item.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -13,13 +13,16 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class Registration {
 
     public static final DeferredRegister<Item> ITEMS = create(ForgeRegistries.ITEMS);
+    public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
 
     public static void register() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ITEMS.register(bus);
+        BLOCKS.register(bus);
 
-        ModItems.register();
+        MBItems.register();
+        MBBlocks.register();
     }
 
 
