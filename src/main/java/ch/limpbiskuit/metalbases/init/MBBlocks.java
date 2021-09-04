@@ -6,14 +6,15 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Supplier;
 
 public class MBBlocks {
 
-    public static final Block IRON_BASE = new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL).strength(3.0F, 6.0F).sound(SoundType.METAL));
-    public static final Block STEEL_BASE = new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL).strength(3.0F, 6.0F).sound(SoundType.METAL));
+    public static final Block IRON_BASE = new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1).strength(3.0F, 6.0F).sound(SoundType.METAL));
+    public static final Block STEEL_BASE = new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2).strength(3.0F, 6.0F).sound(SoundType.METAL));
 
 
 

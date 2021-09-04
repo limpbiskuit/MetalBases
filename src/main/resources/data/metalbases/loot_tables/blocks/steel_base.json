@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "metalbases/steel_base"
+          "name": "metalbases:steel_base"
         }
       ],
       "conditions": [
