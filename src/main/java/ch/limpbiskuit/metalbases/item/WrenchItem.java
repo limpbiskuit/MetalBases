@@ -1,5 +1,6 @@
 package ch.limpbiskuit.metalbases.item;
 
+import ch.limpbiskuit.metalbases.api.IDismantleable;
 import ch.limpbiskuit.metalbases.util.OrientationHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,6 +8,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -24,13 +29,21 @@ public class WrenchItem extends Item {
     public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
         World world = context.getLevel();
         PlayerEntity player = context.getPlayer();
-        BlockState clickedBlock = world.getBlockState(context.getClickedPos());
+        BlockPos clickedPos = context.getClickedPos();
+        BlockState clickedBlock = world.getBlockState(clickedPos);
+        Direction direction = context.getClickedFace();
         ItemStack itemInHand = context.getItemInHand();
 
         if(!world.isClientSide && player != null) {
+            if(getMode(itemInHand)) {
+                if(clickedBlock.getBlock() instanceof IDismantleable) {
+                    BlockRayTraceResult target = new BlockRayTraceResult(context.getClickLocation(), direction, clickedPos, context.isInside());
+                    //EntityRayTraceResult target = new EntityRayTraceResult(player, context.getClickLocation());
 
-            if(!getMode(itemInHand)) {
-                OrientationHelper.orientBlock(clickedBlock, world, context.getClickedPos(), context.getClickedFace());
+                    ((IDismantleable) clickedBlock.getBlock()).dismantleBlock(clickedBlock, world, clickedPos, target, player);
+                }
+            } else if(!getMode(itemInHand)) {
+                OrientationHelper.orientBlock(clickedBlock, world, context.getClickedPos(), direction);
                 return ActionResultType.SUCCESS;
             }
         }

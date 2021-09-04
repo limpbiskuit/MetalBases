@@ -1,5 +1,6 @@
 package ch.limpbiskuit.metalbases.init;
 
+import ch.limpbiskuit.metalbases.block.BaseBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -13,8 +14,8 @@ import java.util.function.Supplier;
 
 public class MBBlocks {
 
-    public static final Block IRON_BASE = new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1).strength(3.0F, 6.0F).sound(SoundType.METAL));
-    public static final Block STEEL_BASE = new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2).strength(3.0F, 6.0F).sound(SoundType.METAL));
+    public static final Block IRON_BASE = new BaseBlock(AbstractBlock.Properties.of(Material.HEAVY_METAL).strength(3.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).requiresCorrectToolForDrops().sound(SoundType.METAL));
+    public static final Block STEEL_BASE = new BaseBlock(AbstractBlock.Properties.of(Material.HEAVY_METAL).strength(3.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2).requiresCorrectToolForDrops().sound(SoundType.METAL));
 
 
 
