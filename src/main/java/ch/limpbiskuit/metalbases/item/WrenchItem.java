@@ -29,7 +29,7 @@ public class WrenchItem extends Item {
 
         if(!world.isClientSide && player != null) {
 
-            if(getMode(itemInHand)) {
+            if(!getMode(itemInHand)) {
                 OrientationHelper.orientBlock(clickedBlock, world, context.getClickedPos(), context.getClickedFace());
                 return ActionResultType.SUCCESS;
             }
