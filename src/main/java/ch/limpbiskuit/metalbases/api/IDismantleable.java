@@ -4,4 +4,8 @@ import net.minecraftforge.common.extensions.IForgeBlock;
 
 public interface IDismantleable extends IForgeBlock {
 
+    static IForgeBlock dismantleBlock() {
+        return null;
+    }
+
 }

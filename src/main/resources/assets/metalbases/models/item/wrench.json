@@ -1,7 +1,14 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-      "layer0": "metalbases:item/wrench"
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "metalbases:item/wrench"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "metalbases:configmode": 1.0
+      },
+      "model": "metalbases:item/wrench_config"
     }
-  }
-  
+  ]
+}

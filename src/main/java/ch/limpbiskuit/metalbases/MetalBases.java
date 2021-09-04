@@ -1,6 +1,10 @@
 package ch.limpbiskuit.metalbases;
 
+import ch.limpbiskuit.metalbases.init.MBItems;
 import ch.limpbiskuit.metalbases.init.Registration;
+import ch.limpbiskuit.metalbases.item.WrenchItem;
+import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -24,6 +28,8 @@ public class MetalBases {
     }
 
     private void clientSetup(FMLClientSetupEvent e) {
+
+        e.enqueueWork(() -> ItemModelsProperties.register(MBItems.WRENCH, new ResourceLocation(MODID, "configmode"), (stack, world, living) -> WrenchItem.getMode(stack) ? 1.0F : 0.0F));
 
     }
 

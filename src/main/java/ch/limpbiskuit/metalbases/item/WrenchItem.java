@@ -1,13 +1,12 @@
 package ch.limpbiskuit.metalbases.item;
 
+import ch.limpbiskuit.metalbases.util.OrientationHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -15,7 +14,7 @@ import javax.annotation.Nonnull;
 
 public class WrenchItem extends Item {
 
-    protected static final String MODE_TAG = "rotationMode";
+    protected static final String MODE_TAG = "configmode";
 
     public WrenchItem(Properties properties) {
         super(properties);
@@ -31,7 +30,7 @@ public class WrenchItem extends Item {
         if(!world.isClientSide && player != null) {
 
             if(getMode(itemInHand)) {
-                orientBlock(clickedBlock, world, context, context.getClickedFace());
+                OrientationHelper.orientBlock(clickedBlock, world, context.getClickedPos(), context.getClickedFace());
                 return ActionResultType.SUCCESS;
             }
         }
@@ -40,15 +39,12 @@ public class WrenchItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World p_77659_1_, PlayerEntity p_77659_2_,@Nonnull Hand p_77659_3_) {
+    @Nonnull
+    public ActionResult<ItemStack> use(@Nonnull World p_77659_1_, PlayerEntity p_77659_2_, @Nonnull Hand p_77659_3_) {
         ItemStack itemInHand = p_77659_2_.getItemInHand(p_77659_3_);
 
         if(p_77659_2_.isShiftKeyDown()) {
-            if ((getMode(itemInHand))) {
-                setMode(itemInHand, false);
-            } else {
-                setMode(itemInHand, true);
-            }
+            setMode(itemInHand, !getMode(itemInHand));
             return ActionResult.success(itemInHand);
         }
 
@@ -57,27 +53,7 @@ public class WrenchItem extends Item {
 
 
 
-    private void orientBlock(BlockState clickedBlock, World world, ItemUseContext context, Direction direction) {
-        BlockPos blockPos = context.getClickedPos();
 
-        if (clickedBlock.hasProperty(BlockStateProperties.FACING)) {
-            world.setBlockAndUpdate(blockPos, clickedBlock.setValue(BlockStateProperties.FACING, direction));
-        }
-        else if (clickedBlock.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-            if(direction == Direction.UP || direction == Direction.DOWN) {
-                world.setBlockAndUpdate(blockPos, clickedBlock.rotate(world, blockPos, Rotation.COUNTERCLOCKWISE_90));
-            } else {
-                world.setBlockAndUpdate(blockPos, clickedBlock.setValue(BlockStateProperties.HORIZONTAL_FACING, direction));
-            }
-        }
-        else if (clickedBlock.hasProperty(BlockStateProperties.FACING_HOPPER)) {
-            if(direction == Direction.UP) {
-                world.setBlockAndUpdate(blockPos, clickedBlock.setValue(BlockStateProperties.FACING_HOPPER, Direction.DOWN));
-            } else {
-                world.setBlockAndUpdate(blockPos, clickedBlock.setValue(BlockStateProperties.FACING_HOPPER, direction));
-            }
-        }
-    }
 
     public  static void setMode(ItemStack stack, boolean mode) {
         stack.getOrCreateTag().putBoolean(MODE_TAG, mode);
